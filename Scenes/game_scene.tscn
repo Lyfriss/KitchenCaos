@@ -1,0 +1,138 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxefpo3mjpin3"]
+
+[ext_resource type="PackedScene" uid="uid://d3tomctbtwdli" path="res://Assets/fbx/floor_kitchen.fbx" id="1_x87qo"]
+[ext_resource type="Script" uid="uid://bt07xdmpuedwx" path="res://Scripts/Player.gd" id="2_b6fju"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x87qo"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_b6fju"]
+sky_material = SubResource("ProceduralSkyMaterial_x87qo")
+
+[sub_resource type="Environment" id="Environment_6h5vk"]
+background_mode = 2
+sky = SubResource("Sky_b6fju")
+tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 0.3
+ssao_intensity = 4.0
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.0
+glow_bloom = 0.95
+glow_blend_mode = 4
+adjustment_enabled = true
+adjustment_contrast = 1.2
+adjustment_saturation = 1.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x87qo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x87qo"]
+
+[node name="GameScene" type="Node3D"]
+
+[node name="Enviroment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
+environment = SubResource("Environment_6h5vk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="Floor" type="Node3D" parent="Stage"]
+
+[node name="floor_kitchen" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="floor_kitchen2" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 0)
+
+[node name="floor_kitchen3" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, 0)
+
+[node name="floor_kitchen4" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.5, 0)
+
+[node name="floor_kitchen5" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, 0)
+
+[node name="floor_kitchen6" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4)
+
+[node name="floor_kitchen7" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, -4)
+
+[node name="floor_kitchen8" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, -4)
+
+[node name="floor_kitchen9" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.5, -4)
+
+[node name="floor_kitchen10" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, -4)
+
+[node name="floor_kitchen11" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -8)
+
+[node name="floor_kitchen12" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, -8)
+
+[node name="floor_kitchen13" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, -8)
+
+[node name="floor_kitchen14" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.5, -8)
+
+[node name="floor_kitchen15" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, -8)
+
+[node name="floor_kitchen16" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 4)
+
+[node name="floor_kitchen17" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 4)
+
+[node name="floor_kitchen18" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, 4)
+
+[node name="floor_kitchen19" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.5, 4)
+
+[node name="floor_kitchen20" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, 4)
+
+[node name="floor_kitchen21" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 8)
+
+[node name="floor_kitchen22" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 8)
+
+[node name="floor_kitchen23" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, 8)
+
+[node name="floor_kitchen24" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.5, 8)
+
+[node name="floor_kitchen25" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, 8)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.694658, 0.71934, 0, -0.71934, 0.694658, 0, 21, 21.3)
+current = true
+fov = 20.0
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_b6fju")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_x87qo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_x87qo")
