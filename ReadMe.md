@@ -66,8 +66,33 @@ Thanks to Godot's node structure, maintaining the separation between a player's 
 - Add a MeshInstance3D for the player's visual representation (for now)
 
 ## Player movement: 
-Implementing the movement in Godot was straightforward.
+Implementing player movement in Godot was straightforward.
 All that was needed was to toggle jumping and gravity from the template.
+Unfortunately, there is no obfuscation in GDScript (to my knowledge)
 
-Unfortunatly in GDscript there is no obfuscation (in my knowledge)
+# Animations: 
+I used **Animation Player** to create the *Idle* and *Walk* animations, playing them based on the condition:
+
+	@export var player: Player
+	@export var animation_player: AnimationPlayer
+
+	func _process(_delta):
+		if player.velocity.x != 0 || player.velocity.z != 0:
+			animation_player.play("Walk")
+		else:
+			animation_player.play("Idle")
+
+What wasn't straightforward was rotating the player.
+In Unity, all Codemonkey needed to do was:
+	
+	float rotateSpeed = 10;
+	transform.foward = Vector3.lerp(transform.foward, moveDir, Time.deltaTime * rotateSpeed);
+
+With a lot of trial and error i replicate the effect with: 
+
+	if direction:
+		var rotate_speed : float = 10
+		var target_basis := Basis(Vector3(0, 1, 0), atan2(direction.x, direction.z))
+		set_basis(basis.slerp(target_basis, rotate_speed * delta))
+
 
