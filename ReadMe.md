@@ -6,6 +6,18 @@ My objective is to follow the [curse](https://www.youtube.com/watch?v=AmGSEH7QcD
 
 Another important note is that I will be using **GDscript** and not **C#**, although it is possible to use C# in Godot. I have chosen to use GDscript for personal reasons.
 
+## Index: 
+
+* [Post processing](#post-processing)
+* [Player](#player)
+* [Animations](#animations)
+* [Cinemachine](#cinemachine)
+* [Refractor](#refractor)
+* [Collision](#collision)
+* [Clear Counter](#clear-counter)
+  
+	-[Interactions](#interactions)
+
 ## Preparation:
 The preparations consisted of:
 1) Creating the Godot project
@@ -17,7 +29,7 @@ Unfortunately, the curse does not have a section for GitHub.
 ## Assets:
 The assets provided by Code Monkey were not used in this project. Instead, the **[KayKit : Restaurant Bits](https://kaylousberg.itch.io/restaurant-bits)** asset pack created by **[Kay Lousberg](https://kaylousberg.itch.io/)** was used as a substitute.
 
-# Post processing 
+# Post processing <a name = "post-processing" ></a>
 
 ## Settings used in the curse:
 ### Unity settings:
@@ -57,20 +69,20 @@ To note, Godot does not have a vignette by default.
 	* Rotation: -46, 0, 0
 	* Fov: 20
 
-# Player:
+# Player: <a name = "player"></a>
 
 Thanks to Godot's node structure, maintaining the separation between a player's logic and visual elements is straightforward.
 
-- Create a CharacterBody3D as the root node
-- Add a CollisionShape3D and use a cylinder as the player's collision shape
-- Add a MeshInstance3D for the player's visual representation (for now)
+![Player structure](Docs/PlayerStructure.png)
+
+I've recreated the look of the player using simple spheres 
 
 ## Player movement: 
 Implementing player movement in Godot was straightforward.
 All that was needed was to toggle jumping and gravity from the template.
 Unfortunately, there is no obfuscation in GDScript (to my knowledge)
 
-# Animations: 
+# Animations: <a name = "animations"> </a>
 I used **Animation Player** to create the *Idle* and *Walk* animations, playing them based on the condition:
 
 	@export var player: Player
@@ -96,3 +108,30 @@ With a lot of trial and error i replicate the effect with:
 		set_basis(basis.slerp(target_basis, rotate_speed * delta))
 
 
+
+# Cinemachine: <a name = "cinemachine"> </a> 
+In this section, CodeMonkey showcases Cinemachine, which is the equivalent of Godot's **Phantom Camera**. However, I will skip this section regardless.
+
+# Refractor: <a name = "refractor"></a>
+
+Although there is no *NewInputSystem* in Godot, I still created a **GameInput** node and refractored the input
+
+	extends Node
+	class_name GameInput
+
+	func get_player_movement_vector() -> Vector2:
+		return Vector2(Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down"))
+
+# Collision: <a name = "collision"></a>
+
+CharacterBody3d handles collion on it's own, skip
+
+# Clear counter: <a name = "clear-counter"></a>
+
+To enable collisions, I had to use a **StaticBody3D** as the parent node.
+
+![alt text](Docs/ClearCounterStructure.png)
+
+## Interactions: <a name = "interactions"></a>
+
+Godot has by default an **raycast3D** node

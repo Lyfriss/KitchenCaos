@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfdtmgayv08up"]
+
+[ext_resource type="Script" uid="uid://c346tdhwq4ru0" path="res://Scripts/Counter.gd" id="1_hfhqe"]
+[ext_resource type="PackedScene" uid="uid://dvrwjdovv8sk6" path="res://Assets/fbx/kitchencounter_straight_A_backsplash.fbx" id="2_ge63e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2fmhe"]
+size = Vector3(2, 2, 2)
+
+[node name="ClearCounter" type="StaticBody3D"]
+script = ExtResource("1_hfhqe")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="kitchencounter_straight_A_backsplash" parent="Visual" instance=ExtResource("2_ge63e")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_2fmhe")
