@@ -6,7 +6,7 @@
 [ext_resource type="Material" uid="uid://lwkl178f1kis" path="res://Assets/materials/PlayerBody.tres" id="3_6h5vk"]
 [ext_resource type="Material" uid="uid://8ecyg0g1bbwv" path="res://Assets/materials/PlayerEye.tres" id="4_fiftr"]
 [ext_resource type="Script" uid="uid://b12br4wbr6xj7" path="res://Scripts/GameInput.gd" id="6_rgj8m"]
-[ext_resource type="PackedScene" uid="uid://bfdtmgayv08up" path="res://Scenes/Prefabs/ClearCounter.tscn" id="7_2fmhe"]
+[ext_resource type="PackedScene" uid="uid://bfdtmgayv08up" path="res://Scenes/Prefabs/Kitcen Counters/ClearCounter.tscn" id="7_2fmhe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x87qo"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -131,7 +131,8 @@ _data = {
 environment = SubResource("Environment_6h5vk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment"]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(0.965925, -0.220915, 0.134847, 0, 0.52101, 0.853551, -0.258819, -0.824467, 0.503256, 0, 0, 0)
+light_energy = 0.75
 shadow_enabled = true
 metadata/_edit_lock_ = true
 
@@ -211,8 +212,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, 8)
 [node name="floor_kitchen24" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.5, 8)
 
+[node name="floor_kitchen26" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -0.5, 0)
+
+[node name="floor_kitchen27" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -0.5, -4)
+
+[node name="floor_kitchen28" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.5, -8)
+
+[node name="floor_kitchen29" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -0.5, -8)
+
+[node name="floor_kitchen30" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -0.5, 4)
+
+[node name="floor_kitchen31" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -0.5, 8)
+
 [node name="floor_kitchen25" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, 8)
+
+[node name="floor_kitchen32" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.5, 0)
+
+[node name="floor_kitchen33" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.5, -4)
+
+[node name="floor_kitchen34" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.5, -8)
+
+[node name="floor_kitchen35" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.5, 4)
+
+[node name="floor_kitchen36" parent="Stage/Floor" instance=ExtResource("1_x87qo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.5, 8)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.694658, 0.71934, 0, -0.71934, 0.694658, 0, 21, 21.3)

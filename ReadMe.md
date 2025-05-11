@@ -15,8 +15,8 @@ Another important note is that I will be using **GDscript** and not **C#**, alth
 * [Refractor](#refractor)
 * [Collision](#collision)
 * [Clear Counter](#clear-counter)
-  
-	-[Interactions](#interactions)
+	- [Interactions](#interactions)
+	- [Selected Visual](#selected-visual)
 
 ## Preparation:
 The preparations consisted of:
@@ -135,3 +135,68 @@ To enable collisions, I had to use a **StaticBody3D** as the parent node.
 ## Interactions: <a name = "interactions"></a>
 
 Godot has by default an **raycast3D** node
+
+I verify that the raycast collides with the correct object by checking the object's class:
+
+	func _handle_interaction() -> void:
+		if interaction_ray.get_collider() is Counter:
+			set_selected_counter(interaction_ray.get_collider())
+		else :
+			set_selected_counter(null)
+
+Created an input for the interaction:
+
+![alt text](Docs/Inputs.png)
+
+In GameInput, I've created a **signal** named "interact" and emit it when the player provides the input.
+
+	extends Node
+	class_name GameInput
+
+	signal interact
+
+	func _unhandled_key_input(event: InputEvent) -> void:
+		if event.is_action_pressed("Interact"):
+			emit_signal("interact")
+
+the player listens to the signal and calls the appropiate function
+
+	func _ready() -> void:
+		gameInput.interact.connect(handle_interaction)
+
+	func handle_interaction() -> void:
+		if selected_counter:
+			selected_counter.interact()
+
+## Selected visual: <a name = "selected-visual"></a>
+
+In Godot, the equivalent of the **Singleton pattern** is the **Autoload** system.
+I created the Autoload "GameManager", which is a script that is always active and can be accessed by every other script.
+
+![alt text](Docs/AutoLoads.png)
+
+
+	signal selected_counter_changed
+
+	var selected_counter: Counter
+
+	func set_selected_counter(new_selected_counter: Counter) -> void:
+		selected_counter = new_selected_counter
+		selected_counter_changed.emit()
+
+
+The player invokes the function whenever the selected counter is updated:
+
+	GameManager.set_selected_counter(selected_counter)
+
+The script managing the visual listens:
+
+	@export var counter: Counter
+	@export var selected_visual: MeshInstance3D
+
+	func _ready() -> void:
+		selected_visual.visible = false
+		GameManager.selected_counter_changed.connect(on_selected_counter_changed)
+
+	func on_selected_counter_changed() -> void:
+		selected_visual.visible = counter == GameManager.selected_counter

@@ -8,13 +8,18 @@ class_name Player
 @export var movement_speed: float = 7.0
 
 var is_moving: bool = false
+var selected_counter: Counter
+
+func _ready() -> void:
+	gameInput.interact.connect(handle_interaction)
+	selected_counter = null
 
 func _physics_process(delta: float) -> void:
-	_handle_movement(delta)
-	_handle_interaction()
+	handle_movement(delta)
+	handle_selection()
 	
 
-func _handle_movement(delta: float) -> void:
+func handle_movement(delta: float) -> void:
 	var input_dir := gameInput.get_player_movement_vector()
 	var direction := Vector3(input_dir.x, 0, input_dir.y).normalized()
 	if direction:
@@ -32,6 +37,17 @@ func _handle_movement(delta: float) -> void:
 	is_moving = direction != Vector3.ZERO
 	move_and_slide()
 
-func _handle_interaction() -> void:
-	if interaction_ray.get_collider().has_method("interact"):
-		interaction_ray.get_collider().interact()
+func handle_selection() -> void:
+	if interaction_ray.get_collider() is Counter:
+		set_selected_counter(interaction_ray.get_collider())
+	else :
+		set_selected_counter(null)
+
+
+func set_selected_counter(counter: Counter) -> void:
+	selected_counter = counter
+	GameManager.set_selected_counter(selected_counter)
+
+func handle_interaction() -> void:
+	if selected_counter:
+		selected_counter.interact()
