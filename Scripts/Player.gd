@@ -4,15 +4,19 @@ class_name Player
 @export_category("Dependencies")
 @export var gameInput: GameInput
 @export var interaction_ray: RayCast3D
+@export var hand : Marker3D
 
+@export_category("Movement")
 @export var movement_speed: float = 7.0
 
 var is_moving: bool = false
 var selected_counter: Counter
+var held_kitchen_object: KitchenObject 
 
 func _ready() -> void:
 	gameInput.interact.connect(handle_interaction)
 	selected_counter = null
+	held_kitchen_object = null
 
 func _physics_process(delta: float) -> void:
 	handle_movement(delta)
@@ -43,11 +47,10 @@ func handle_selection() -> void:
 	else :
 		set_selected_counter(null)
 
-
 func set_selected_counter(counter: Counter) -> void:
 	selected_counter = counter
 	GameManager.set_selected_counter(selected_counter)
 
 func handle_interaction() -> void:
 	if selected_counter:
-		selected_counter.interact()
+		selected_counter.interact(self)

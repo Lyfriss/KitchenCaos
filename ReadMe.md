@@ -15,8 +15,10 @@ Another important note is that I will be using **GDscript** and not **C#**, alth
 * [Refractor](#refractor)
 * [Collision](#collision)
 * [Clear Counter](#clear-counter)
-	- [Interactions](#interactions)
-	- [Selected Visual](#selected-visual)
+	* [Interactions](#interactions)
+	* [Selected Visual](#selected-visual)
+* [Resources](#resources)
+* [Player pick up](#player-pick-up)
 
 ## Preparation:
 The preparations consisted of:
@@ -29,7 +31,7 @@ Unfortunately, the curse does not have a section for GitHub.
 ## Assets:
 The assets provided by Code Monkey were not used in this project. Instead, the **[KayKit : Restaurant Bits](https://kaylousberg.itch.io/restaurant-bits)** asset pack created by **[Kay Lousberg](https://kaylousberg.itch.io/)** was used as a substitute.
 
-# Post processing <a name = "post-processing" ></a>
+# Post processing 
 
 ## Settings used in the curse:
 ### Unity settings:
@@ -69,7 +71,7 @@ To note, Godot does not have a vignette by default.
 	* Rotation: -46, 0, 0
 	* Fov: 20
 
-# Player: <a name = "player"></a>
+# Player: 
 
 Thanks to Godot's node structure, maintaining the separation between a player's logic and visual elements is straightforward.
 
@@ -82,8 +84,8 @@ Implementing player movement in Godot was straightforward.
 All that was needed was to toggle jumping and gravity from the template.
 Unfortunately, there is no obfuscation in GDScript (to my knowledge)
 
-# Animations: <a name = "animations"> </a>
-I used **Animation Player** to create the *Idle* and *Walk* animations, playing them based on the condition:
+# Animations: 
+I used `Animation Player` to create the *Idle* and *Walk* animations, playing them based on the condition:
 
 	@export var player: Player
 	@export var animation_player: AnimationPlayer
@@ -109,10 +111,10 @@ With a lot of trial and error i replicate the effect with:
 
 
 
-# Cinemachine: <a name = "cinemachine"> </a> 
+# Cinemachine: 
 In this section, CodeMonkey showcases Cinemachine, which is the equivalent of Godot's **Phantom Camera**. However, I will skip this section regardless.
 
-# Refractor: <a name = "refractor"></a>
+# Refractor: 
 
 Although there is no *NewInputSystem* in Godot, I still created a **GameInput** node and refractored the input
 
@@ -122,19 +124,19 @@ Although there is no *NewInputSystem* in Godot, I still created a **GameInput** 
 	func get_player_movement_vector() -> Vector2:
 		return Vector2(Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down"))
 
-# Collision: <a name = "collision"></a>
+# Collision: 
 
-CharacterBody3d handles collion on it's own, skip
+`CharacterBody3d` handles collion on it's own, skip
 
-# Clear counter: <a name = "clear-counter"></a>
+# Clear counter: 
 
-To enable collisions, I had to use a **StaticBody3D** as the parent node.
+To enable collisions, I had to use a `StaticBody3D` as the parent node.
 
 ![alt text](Docs/ClearCounterStructure.png)
 
-## Interactions: <a name = "interactions"></a>
+## Interactions: 
 
-Godot has by default an **raycast3D** node
+Godot has by default an `raycast3D` node
 
 I verify that the raycast collides with the correct object by checking the object's class:
 
@@ -159,7 +161,7 @@ In GameInput, I've created a **signal** named "interact" and emit it when the pl
 		if event.is_action_pressed("Interact"):
 			emit_signal("interact")
 
-the player listens to the signal and calls the appropiate function
+the player listens to the `signal` and calls the appropiate function
 
 	func _ready() -> void:
 		gameInput.interact.connect(handle_interaction)
@@ -200,3 +202,68 @@ The script managing the visual listens:
 
 	func on_selected_counter_changed() -> void:
 		selected_visual.visible = counter == GameManager.selected_counter
+
+# Resources
+
+**Scriptable Objects** are a Unity concept, but the idea can be adapted to Godot (with a few quirks).
+
+Resources are reusable, savable containers of values, separated from scenes and nodes.
+They provide a way to:
+- easily share and modify data
+- avoid duplication
+- decouple values between logic and instances
+
+This makes the code easier to read and maintain, as it clearly states the benefits of using Resources.
+
+To create a scriptable object, also known as a **Resource** in Godot, create a script:
+
+	extends Resource
+	class_name KitchenObjectSO
+
+	@export var name: String
+	@export var scene: PackedScene
+
+# Player pick up: 
+
+This section was the most challenging part of the course for me. 
+I found it jumped between what the player does, what the counter does and what the kitchen object does (not the resource, a new script created) too quickly to much.
+
+That's why I came up with a different solution that works better for **me**, but it may be more or less confusing for others. Regardless, it does what this section of the curse wants.
+
+What i've done was: 
+
+1) Set up a `Marker3D` node as the player's hand to hold kitchen objects.
+2) Track the current kitchen object held by the player.
+3) Develop a dedicated script for `KitchenObject` with utility functions:
+
+		extends Node3D
+		class_name KitchenObject
+
+		func change_holder(new_parent: Node3D):
+			get_parent().remove_child(self)
+			new_parent.add_child(self)
+			global_transform.origin = new_parent.global_transform.origin
+
+4) Centralize the interaction logic by having the player pass itself to the counter, allowing for:
+
+		func interact(player: Player) -> void:
+			if !ingridient_instance and !player.held_kitchen_object:
+				print("spawn ingridient")
+				ingridient_instance = ingridient.scene.instantiate()
+				add_child(ingridient_instance)
+				ingridient_instance.global_transform.origin = top.global_transform.origin
+			
+			elif ingridient_instance and !player.held_kitchen_object:
+				print("give ingridient")
+				player.held_kitchen_object = give_kitchen_object()
+				player.held_kitchen_object.change_holder(player.hand)
+
+			elif !ingridient_instance and player.held_kitchen_object:
+				print("take ingridient")
+				ingridient_instance = player.held_kitchen_object
+				player.held_kitchen_object = null
+				ingridient_instance.change_holder(self)
+
+5) The player only calls the counter function, which is delegated the interaction logic, keeping the code organized and easy to follow.
+
+As I mentioned earlier, this approach is easier for me to follow, but one disadvantage is that I skipped using interfaces for now.
