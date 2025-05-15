@@ -11,7 +11,7 @@ class_name Player
 
 var is_moving: bool = false
 var selected_counter: Counter
-var held_kitchen_object: KitchenObject 
+var held_kitchen_object: KitchenObject
 
 func _ready() -> void:
 	gameInput.interact.connect(handle_interaction)

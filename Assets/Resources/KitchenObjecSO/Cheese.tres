@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=3 format=3 uid="uid://cwh1qjcele6kc"]
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=3 format=3 uid="uid://dx8dfn00lgtqx"]
 
 [ext_resource type="Script" uid="uid://bntblc6dwl84y" path="res://Scripts/KitchenObjectSO.gd" id="1_iuwhh"]
-[ext_resource type="PackedScene" uid="uid://d1jex5s5fm8hj" path="res://Scenes/Prefabs/Kitchen Objects/Cheese.tscn" id="1_udnnq"]
+[ext_resource type="PackedScene" uid="uid://ch622t0f3mkjd" path="res://Scenes/Prefabs/Kitchen Objects/Cheese.tscn" id="1_udnnq"]
 
 [resource]
 script = ExtResource("1_iuwhh")

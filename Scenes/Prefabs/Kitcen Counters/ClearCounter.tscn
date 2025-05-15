@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://bfdtmgayv08up"]
+[gd_scene load_steps=9 format=4 uid="uid://bfdtmgayv08up"]
 
-[ext_resource type="Script" uid="uid://c346tdhwq4ru0" path="res://Scripts/Counter.gd" id="1_hfhqe"]
-[ext_resource type="Resource" uid="uid://xa40cqp5fl0d" path="res://Assets/Resources/KitchenObjecSO/Tomato.tres" id="2_a650m"]
+[ext_resource type="Script" uid="uid://b47k7s2fo45fc" path="res://Scripts/ClearCounter.gd" id="1_a650m"]
 [ext_resource type="Script" uid="uid://idbhdhdpk8w6" path="res://Scripts/CounterVisual.gd" id="2_ge63e"]
 [ext_resource type="Texture2D" uid="uid://bid8yscabqwbg" path="res://Assets/fbx/restaurantbits_texture.png" id="2_hfhqe"]
+[ext_resource type="Material" uid="uid://cnii6rryxw6k7" path="res://Assets/materials/SelectedMaterial.tres" id="4_a650m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tysb0"]
 resource_name = "restaurant"
@@ -45,17 +45,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ordl7")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfhqe"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.0980392)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_2fmhe"]
 size = Vector3(2, 2, 2)
 
 [node name="ClearCounter" type="StaticBody3D" node_paths=PackedStringArray("top")]
-script = ExtResource("1_hfhqe")
+script = ExtResource("1_a650m")
+counterName = "ClearCounter"
 top = NodePath("Holder")
-ingridient = ExtResource("2_a650m")
 
 [node name="Visual" type="Node3D" parent="." node_paths=PackedStringArray("counter", "selected_visual")]
 script = ExtResource("2_ge63e")
@@ -72,7 +68,7 @@ transform = Transform3D(101, 0, 0, 0, -4.41485e-06, 101, 0, -101, -4.41485e-06, 
 visible = false
 mesh = SubResource("ArrayMesh_ge63e")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_hfhqe")
+surface_material_override/0 = ExtResource("4_a650m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

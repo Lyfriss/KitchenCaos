@@ -7,7 +7,7 @@
 [ext_resource type="Material" uid="uid://8ecyg0g1bbwv" path="res://Assets/materials/PlayerEye.tres" id="4_fiftr"]
 [ext_resource type="Script" uid="uid://b12br4wbr6xj7" path="res://Scripts/GameInput.gd" id="6_rgj8m"]
 [ext_resource type="PackedScene" uid="uid://bfdtmgayv08up" path="res://Scenes/Prefabs/Kitcen Counters/ClearCounter.tscn" id="7_2fmhe"]
-[ext_resource type="Resource" uid="uid://cwh1qjcele6kc" path="res://Assets/Resources/KitchenObjecSO/Cheese.tres" id="8_7iton"]
+[ext_resource type="PackedScene" uid="uid://bclrw6sxu6gh2" path="res://Scenes/Prefabs/Kitcen Counters/CrateCounter.tscn" id="8_7iton"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x87qo"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -309,9 +309,9 @@ script = ExtResource("6_rgj8m")
 
 [node name="ClearCounter" parent="." instance=ExtResource("7_2fmhe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-message = "Bob"
 
 [node name="ClearCounter2" parent="." instance=ExtResource("7_2fmhe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
-message = "Bill"
-ingridient = ExtResource("8_7iton")
+
+[node name="CrateCounter" parent="." instance=ExtResource("8_7iton")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)

@@ -223,18 +223,19 @@ To create a scriptable object, also known as a **Resource** in Godot, create a s
 	@export var name: String
 	@export var scene: PackedScene
 
-# Player pick up: 
+# Player pick up (And Interfaces): 
 
-This section was the most challenging part of the course for me. 
-I found it jumped between what the player does, what the counter does and what the kitchen object does (not the resource, a new script created) too quickly to much.
+This section was the most challenging part of the course for me. The transitions between what the player, the counter, and the kitchen object (a new script, not the resource) should do were too abrupt.
 
-That's why I came up with a different solution that works better for **me**, but it may be more or less confusing for others. Regardless, it does what this section of the curse wants.
+Additionally, GDscript doesn't natively support interfaces.
 
-What i've done was: 
+Therefore, I devised a different solution that suits **me** better, though it might vary in clarity for others. Nonetheless, it accomplishes the objectives of this part of the course.
+
+Here's what I did:
 
 1) Set up a `Marker3D` node as the player's hand to hold kitchen objects.
-2) Track the current kitchen object held by the player.
-3) Develop a dedicated script for `KitchenObject` with utility functions:
+2) Keep track of the kitchen object currently held by the player.
+3) Create a dedicated script for `KitchenObject` with utility functions:
 
 		extends Node3D
 		class_name KitchenObject
@@ -265,5 +266,3 @@ What i've done was:
 				ingridient_instance.change_holder(self)
 
 5) The player only calls the counter function, which is delegated the interaction logic, keeping the code organized and easy to follow.
-
-As I mentioned earlier, this approach is easier for me to follow, but one disadvantage is that I skipped using interfaces for now.
