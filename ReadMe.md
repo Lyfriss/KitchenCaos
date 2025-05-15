@@ -266,3 +266,61 @@ Here's what I did:
 				ingridient_instance.change_holder(self)
 
 5) The player only calls the counter function, which is delegated the interaction logic, keeping the code organized and easy to follow.
+
+# Counters
+
+I developed scripts for "ClearCounter" and "CrateCounter," both of which extend the functionality of the base class Counter:
+
+	extends Node3D
+	class_name Counter
+
+	@export var counterName: String = "Counter"
+	@export var top: Marker3D
+
+	var ingridient_instance: KitchenObject
+
+	func interact(_player: Player) -> void:
+		print("I forgot something");
+
+
+	func give_kitchen_object() -> KitchenObject:
+		var obj = ingridient_instance
+		ingridient_instance = null
+		return obj
+
+## ClearCounter: 
+
+	extends Counter
+	class_name ClearCounter
+
+	func interact(player: Player) -> void:
+		if ingridient_instance and !player.held_kitchen_object:
+			print("give ingridient")
+			player.held_kitchen_object = give_kitchen_object()
+			player.held_kitchen_object.change_holder(player.hand)
+
+		elif !ingridient_instance and player.held_kitchen_object:
+			print("take ingridient")
+			ingridient_instance = player.held_kitchen_object
+			player.held_kitchen_object = null
+			ingridient_instance.change_holder(top)
+
+## CrateCounter: 
+
+	extends Counter
+	class_name CrateCounter
+
+	@export var ingridient: KitchenObjectSO
+
+	func interact(player: Player) -> void:
+		if !ingridient_instance and !player.held_kitchen_object:
+			print("spawn ingridient & gives it")
+			ingridient_instance = ingridient.scene.instantiate()
+			add_child(ingridient_instance)
+
+			player.held_kitchen_object = give_kitchen_object()
+			player.held_kitchen_object.change_holder(player.hand)
+
+Using inheritance, I only need to implement the specific logic for the Counter.
+Creating a new type of counter involves only updating the visual and creating the specific script that extends Counter.
+
