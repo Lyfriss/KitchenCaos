@@ -15,6 +15,7 @@ var held_kitchen_object: KitchenObject
 
 func _ready() -> void:
 	gameInput.interact.connect(handle_interaction)
+	gameInput.interact_2.connect(handle_interaction_2)
 	selected_counter = null
 	held_kitchen_object = null
 
@@ -52,5 +53,9 @@ func set_selected_counter(counter: Counter) -> void:
 	GameManager.set_selected_counter(selected_counter)
 
 func handle_interaction() -> void:
+
 	if selected_counter:
 		selected_counter.interact(self)
+
+	if held_kitchen_object:
+		held_kitchen_object.interact(self)

@@ -9,6 +9,8 @@ var ingridient_instance: KitchenObject
 func interact(_player: Player) -> void:
 	print("I forgot something");
 
+func interact_2(_player: Player) -> void:
+	print("Not implemented");
 
 func give_kitchen_object() -> KitchenObject:
 	var obj = ingridient_instance

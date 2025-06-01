@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=3 format=3 uid="uid://dkoqq8o2jyr1"]
+
+[ext_resource type="PackedScene" uid="uid://cjdq54l5j72lo" path="res://Scenes/Prefabs/Kitchen Objects/Bun.tscn" id="1_ecqyp"]
+[ext_resource type="Script" uid="uid://bntblc6dwl84y" path="res://Scripts/KitchenObjectSO.gd" id="1_npgoj"]
+
+[resource]
+script = ExtResource("1_npgoj")
+name = "Bun"
+scene = ExtResource("1_ecqyp")
+metadata/_custom_type_script = "uid://bntblc6dwl84y"

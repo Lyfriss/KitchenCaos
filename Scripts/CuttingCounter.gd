@@ -1,5 +1,5 @@
 extends Counter
-class_name ClearCounter
+class_name CuttingCounter
 
 func interact(player: Player) -> void:
 	if ingridient_instance and !player.held_kitchen_object:
@@ -12,3 +12,6 @@ func interact(player: Player) -> void:
 		ingridient_instance = player.held_kitchen_object
 		player.held_kitchen_object = null
 		ingridient_instance.change_holder(top)
+
+func interact_2(player: Player) -> void:
+	pass

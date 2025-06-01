@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dxefpo3mjpin3"]
+[gd_scene load_steps=25 format=3 uid="uid://dxefpo3mjpin3"]
 
 [ext_resource type="PackedScene" uid="uid://d3tomctbtwdli" path="res://Assets/fbx/floor_kitchen.fbx" id="1_x87qo"]
 [ext_resource type="Script" uid="uid://bt07xdmpuedwx" path="res://Scripts/Player.gd" id="2_b6fju"]
@@ -7,7 +7,12 @@
 [ext_resource type="Material" uid="uid://8ecyg0g1bbwv" path="res://Assets/materials/PlayerEye.tres" id="4_fiftr"]
 [ext_resource type="Script" uid="uid://b12br4wbr6xj7" path="res://Scripts/GameInput.gd" id="6_rgj8m"]
 [ext_resource type="PackedScene" uid="uid://bfdtmgayv08up" path="res://Scenes/Prefabs/Kitcen Counters/ClearCounter.tscn" id="7_2fmhe"]
-[ext_resource type="PackedScene" uid="uid://bclrw6sxu6gh2" path="res://Scenes/Prefabs/Kitcen Counters/CrateCounter.tscn" id="8_7iton"]
+[ext_resource type="PackedScene" uid="uid://bclrw6sxu6gh2" path="res://Scenes/Prefabs/Kitcen Counters/TomatoCrateCounter.tscn" id="8_7iton"]
+[ext_resource type="PackedScene" uid="uid://db312ytq1or5n" path="res://Scenes/Prefabs/Kitcen Counters/CheeseCrateCounter.tscn" id="9_ikfsv"]
+[ext_resource type="PackedScene" uid="uid://bd58ae1fcvd30" path="res://Scenes/Prefabs/Kitcen Counters/BunCrateCounter.tscn" id="10_4xiap"]
+[ext_resource type="PackedScene" uid="uid://cw4eqjyj3pjot" path="res://Scenes/Prefabs/Kitcen Counters/BurgerCrateCounter.tscn" id="11_wywco"]
+[ext_resource type="PackedScene" uid="uid://clbhx4h56wuvc" path="res://Scenes/Prefabs/Kitcen Counters/LettuceCrateCounter.tscn" id="12_ldntv"]
+[ext_resource type="PackedScene" uid="uid://ckjon8tvjstyw" path="res://Scenes/Prefabs/Kitcen Counters/CuttingCounter.tscn" id="13_wywco"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x87qo"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -307,11 +312,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 1)
 [node name="GameInput" type="Node" parent="."]
 script = ExtResource("6_rgj8m")
 
-[node name="ClearCounter" parent="." instance=ExtResource("7_2fmhe")]
+[node name="Counters" type="Node3D" parent="."]
+
+[node name="ClearCounter" parent="Counters" instance=ExtResource("7_2fmhe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="ClearCounter2" parent="." instance=ExtResource("7_2fmhe")]
+[node name="ClearCounter4" parent="Counters" instance=ExtResource("7_2fmhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="ClearCounter3" parent="Counters" instance=ExtResource("7_2fmhe")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7)
+
+[node name="ClearCounter6" parent="Counters" instance=ExtResource("7_2fmhe")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, 7)
+
+[node name="ClearCounter7" parent="Counters" instance=ExtResource("7_2fmhe")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4, 0, 7)
+
+[node name="ClearCounter2" parent="Counters" instance=ExtResource("7_2fmhe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
 
-[node name="CrateCounter" parent="." instance=ExtResource("8_7iton")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+[node name="ClearCounter5" parent="Counters" instance=ExtResource("7_2fmhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="CrateCounter" parent="Counters" instance=ExtResource("8_7iton")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7)
+
+[node name="CrateCounter2" parent="Counters" instance=ExtResource("9_ikfsv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="CrateCounter3" parent="Counters" instance=ExtResource("10_4xiap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+
+[node name="CrateCounter4" parent="Counters" instance=ExtResource("11_wywco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+
+[node name="CrateCounter5" parent="Counters" instance=ExtResource("12_ldntv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7)
+
+[node name="CuttingCounter" parent="." instance=ExtResource("13_wywco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
+counterName = "CuttingCounter"

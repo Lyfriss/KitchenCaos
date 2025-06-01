@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=3 format=3 uid="uid://bf1epyvn1fl87"]
+
+[ext_resource type="PackedScene" uid="uid://1qw0h1lxnsmr" path="res://Scenes/Prefabs/Kitchen Objects/Lettuce.tscn" id="1_2mut0"]
+[ext_resource type="Script" uid="uid://bntblc6dwl84y" path="res://Scripts/KitchenObjectSO.gd" id="1_4jj45"]
+
+[resource]
+script = ExtResource("1_4jj45")
+name = "Lettuce"
+scene = ExtResource("1_2mut0")
+metadata/_custom_type_script = "uid://bntblc6dwl84y"
